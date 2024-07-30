@@ -1,8 +1,8 @@
 console.log("Starting server...");
 
+const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
-const FormData = require("form-data");
 async function fetchData() {
   try {
     const fetch = await import("node-fetch");
@@ -33,40 +33,46 @@ app.use((req, res, next) => {
 });
 // app.use(cors({ origin: '*' }));
 
+// debugger
+app.post("/authenticate", async (req, res) => {
+  try {
+    const { code } = req.body;
 
-app.post("/authenticate", (req, res) => {
-  const { code } = req.body;
+    // const data = new FormData();
+    // data.append("client_id", client_id);
+    // data.append("client_secret", client_secret);
+    // data.append("code", code);
+    // data.append("redirect_uri", redirect_uri);
+  
+    const data = {
+      "client_id" : client_id,
+      "client_secret": client_secret,
+      "code": code,
+    }
+    console.log(data)
+    
+    // Request to exchange code for an access token
+    const access_token_res = await axios.post(`https://github.com/login/oauth/access_token`, data)
+    console.log(access_token_res.data)
 
-  const data = new FormData();
-  data.append("client_id", client_id);
-  data.append("client_secret", client_secret);
-  data.append("code", code);
-  data.append("redirect_uri", redirect_uri);
-
-  // Request to exchange code for an access token
-  fetch(`https://github.com/login/oauth/access_token`, {
-    method: "POST",
-    body: data,
-  })
-    .then((response) => response.text())
-    .then((paramsString) => {
-      let params = new URLSearchParams(paramsString);
-      const access_token = params.get("access_token");
-
-      // Request to return data of a user that has been authenticated
-      return fetch(`https://api.github.com/user`, {
-        headers: {
-          Authorization: `token ${access_token}`,
-        },
-      });
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      return res.status(200).json(response);
-    })
-    .catch((error) => {
-      return res.status(400).json(error);
+    let params = new URLSearchParams(access_token_res.data);
+    const access_token = params.get("access_token");
+    const user = await axios.get(`https://api.github.com/user`, {
+      headers: {
+        Authorization: `token ${access_token}`,
+      },
     });
+
+    console.log(user)
+
+    return res.status(200).json(user.data);
+  }
+  catch (error) {
+    console.log(error?.message)
+    return res.status(400).json(error);
+  }
+
+  
 });
 
 const PORT = process.env.SERVER_PORT || 5000;
