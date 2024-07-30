@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../App";
 import Button from 'react-bootstrap/Button';
@@ -15,7 +13,7 @@ const TopNavBar = () => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  const { avatar_url, name, public_repos, followers, following } = state.user
+  const { avatar_url, name } = state.user
 
   const handleLogout = () => {
     dispatch({
@@ -26,7 +24,7 @@ const TopNavBar = () => {
   return (
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/">Mini Trello</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

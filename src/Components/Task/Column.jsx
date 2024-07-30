@@ -1,27 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { FaRegEdit } from 'react-icons/fa';
+import Card from './Card';
 
 const Column = ({Marvel, DC, DC2}) => {
 
-    const getListStyle = isDraggingOver => ({
-        background: isDraggingOver ? "lightblue" : "darkgrey",
-        width: '21%',
-        margin: 'auto',
-     });
-     const getItemStyle = (isDragging, draggableStyle) => ({
-        userSelect: "none",
-        background: isDragging ? "darkgrey" : "white",
-        color: isDragging ? "white" : "black",
-        padding: isDragging ? '0%' : '2%',
-        paddingLeft: '2%',
-        margin: '0%',
-        fontSize: '17px',
-        borderBottom: '0.5px solid gray',
-        // styles we need to apply on draggables
-        ...draggableStyle
-     });
+   const getListStyle = isDraggingOver => ({
+      background: isDraggingOver ? "lightblue" : "darkgrey",
+      width: '21%',
+      margin: 'auto',
+   });
+   const getItemStyle = (isDragging, draggableStyle) => ({
+      userSelect: "none",
+      background: isDragging ? "darkgrey" : "white",
+      color: isDragging ? "white" : "black",
+      padding: isDragging ? '0%' : '2%',
+      paddingLeft: '2%',
+      margin: '0%',
+      fontSize: '17px',
+      borderBottom: '0.5px solid gray',
+      // styles we need to apply on draggables
+      ...draggableStyle
+   });
+
+   const [showCard, setShowCard] = useState(false);
+
+   const handleShowCard = () => setShowCard(true);
+   const handleCloseCard = () => setShowCard(false);
    
     return (
     <div style={{ width: '100%', display: 'flex' }}>
@@ -49,7 +55,8 @@ const Column = ({Marvel, DC, DC2}) => {
                                  )}
                               >
                                  {data}
-                                 <FaRegEdit style={{"float":"right"}}/>
+                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
+                                 <Card show={showCard} handleClose={handleCloseCard} />
                               </li>
                            )}
                         </Draggable>
@@ -81,8 +88,9 @@ const Column = ({Marvel, DC, DC2}) => {
                                      provided.draggableProps.style
                                   )}
                                >
-                                  {data} 
-                                  <FaRegEdit style={{"float":"right"}}/>
+                                 {data} 
+                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
+                                 <Card show={showCard} handleClose={handleCloseCard} />
                                </li>
                             )}
                          </Draggable>
@@ -114,8 +122,9 @@ const Column = ({Marvel, DC, DC2}) => {
                                      provided.draggableProps.style
                                   )}
                                >
-                                  {data}
-                                  <FaRegEdit style={{"float":"right"}}/>
+                                 {data}
+                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
+                                 <Card show={showCard} handleClose={handleCloseCard} cardData={data} />
                                </li>
                             )}
                          </Draggable>

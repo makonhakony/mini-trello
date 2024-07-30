@@ -3,6 +3,7 @@ import TopNavBar from "./TopNavBar";
 import { useParams } from "react-router-dom";
 import Column from "./Task/Column";
 import { DragDropContext } from "react-beautiful-dnd";
+import User from "./Task/User";
 
 
 const DashboardInfo = () => {
@@ -63,13 +64,17 @@ const DashboardInfo = () => {
      
     return (
         
-        <div>
-        <TopNavBar></TopNavBar>
-        <h2>dashboard id {dId}</h2>
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Column Marvel={list1} DC={list2} DC2={list3} />
-        </DragDropContext>
-        </div>
+         <div>
+            <TopNavBar></TopNavBar>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '50px' }}>
+               <h2>Dashboard id {dId}</h2>
+               <User />
+            </div>
+         
+            <DragDropContext onDragEnd={onDragEnd}>
+                  <Column Marvel={list1} DC={list2} DC2={list3} />
+            </DragDropContext>
+         </div>
         
     );
 }
