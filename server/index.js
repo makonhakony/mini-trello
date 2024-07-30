@@ -3,6 +3,9 @@ console.log("Starting server...");
 const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
+
+const boardRoute = require("./board")
+
 async function fetchData() {
   try {
     const fetch = await import("node-fetch");
@@ -33,6 +36,7 @@ app.use((req, res, next) => {
 });
 // app.use(cors({ origin: '*' }));
 
+app.use("/board", boardRoute);
 
 app.post("/authenticate", async (req, res) => {
   try {
