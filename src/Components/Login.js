@@ -20,7 +20,7 @@ export default function Login() {
     
     // If Github API returns the code parameter
     if (hasCode) {
-      debugger
+      
       const newUrl = url.split("?code=");
       window.history.pushState({}, null, newUrl[0]);
       setData({ ...data, isLoading: true });
@@ -55,7 +55,7 @@ export default function Login() {
     if (state.isLoggedIn) {
       return <Navigate to="/" replace={true} />;
     }
-  
+    
     return (
       <Wrapper>
         <section className="container">

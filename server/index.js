@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 // app.use(cors({ origin: '*' }));
 
-// debugger
+
 app.post("/authenticate", async (req, res) => {
   try {
     const { code } = req.body;
