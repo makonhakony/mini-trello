@@ -47,7 +47,7 @@ function generateJWT(user, gh_token) {
 
 
 // Initialize Firebase Admin SDK
-const serviceAccount = require('../mini-trello-a8990-firebase-adminsdk-1fxr9-392888d74a.json');
+const serviceAccount = require('../mini-trello-a8990-firebase-adminsdk-1fxr9-9130404ec3.json'); // Add your FireBase file path here
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
   databaseURL: 'https://mini-trello-a8990-default-rtdb.asia-southeast1.firebasedatabase.app/'

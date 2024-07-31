@@ -19,7 +19,7 @@ export default function Home() {
               <br/>
               I was doing this for around 24 hours, Thank you!
               <br/>
-              This challenge is cool, love it 😂
+              This challenge is cool, love it 😂 However, I don't have enough time to finish all of this. I finish a part of backend, full frontend for testing and authorization with github. I can deploy it to my home server if you would love to see it live. Thank you!
             </h2>
             
       
