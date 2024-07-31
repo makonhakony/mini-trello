@@ -28,9 +28,9 @@ const DashboardInfo = () => {
         fetchData();
     }, []);
 
-   const [list1, setList1] = React.useState(['test1'])
-   const [list2, setList2] = React.useState(['test2'])
-   const [list3, setList3] = React.useState(['test3'])
+   const [list1, setList1] = React.useState(['test1','test1','test1','test1','test1','test1'])
+   const [list2, setList2] = React.useState(['test2','test2','test2','test2','test2','test2'])
+   const [list3, setList3] = React.useState(['test3','test3','test3','test3','test3','test3'])
 
    const deleteItem = (list, index) => {
       return list.splice(index, 1)
