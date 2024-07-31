@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { FaRegEdit } from 'react-icons/fa';
 import Card from './Card';
 
-const Column = ({Marvel, DC, DC2}) => {
+const Column = ({ List, Name, Area }) => {
 
    const getListStyle = isDraggingOver => ({
       background: isDraggingOver ? "lightblue" : "darkgrey",
-      width: '21%',
+      width: '80%',
       margin: 'auto',
    });
    const getItemStyle = (isDragging, draggableStyle) => ({
@@ -28,10 +28,13 @@ const Column = ({Marvel, DC, DC2}) => {
 
    const handleShowCard = () => setShowCard(true);
    const handleCloseCard = () => setShowCard(false);
-   
-    return (
-    <div style={{ width: '100%', display: 'flex' }}>
-         <Droppable droppableId="Todo_drop_area"  >
+
+   function addCard() {
+
+   }
+   return (
+      <div style={{ width: '100%', display: 'flex' }}>
+         <Droppable droppableId={Area}  >
             {(provided, snapshot) => (
                <div
                   {...provided.droppableProps}
@@ -39,10 +42,10 @@ const Column = ({Marvel, DC, DC2}) => {
                   style={getListStyle(snapshot.isDraggingOver)}
                >
                   <ul style={{ listStyleType: 'none', textAlign: 'left', padding: '0%', width: '100%' }} >
-                     <h2 style={{ paddingLeft: '2%' }}>To Do</h2>
-                     {Marvel.map((data, index) => (
-                        <Draggable key={data} 
- draggableId={`${data}${index}`} index={index}>
+                     <h2 style={{ paddingLeft: '2%' }}>{Name}</h2>
+                     {List.map((data, index) => (
+                        <Draggable key={data}
+                           draggableId={`${data}${index}`} index={index}>
                            {(provided, snapshot) => (
                               <li
                                  key={index}
@@ -55,87 +58,19 @@ const Column = ({Marvel, DC, DC2}) => {
                                  )}
                               >
                                  {data}
-                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
+                                 <FaRegEdit style={{ "float": "right" }} onClick={handleShowCard} />
                                  <Card show={showCard} handleClose={handleCloseCard} />
                               </li>
                            )}
                         </Draggable>
                      ))}
-                  </ul>
-                 {provided.placeholder}
-              </div>
-           )}
-        </Droppable>
-        <Droppable droppableId="InProgress_drop_area"  >
-           {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}
-              >
-                <ul style={{ listStyleType: 'none', textAlign: 'left', padding: '0%', width: '100%' }} >
-                   <h2 style={{ paddingLeft: '2%' }}>In Progress</h2>
-                      {DC.map((data, index) => (
-                         <Draggable key={data} draggableId={`${data}${index}`} index={index}>
-                            {(provided, snapshot) => (
-                               <li
-                                  key={index}
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={getItemStyle(
-                                     snapshot.isDragging,
-                                     provided.draggableProps.style
-                                  )}
-                               >
-                                 {data} 
-                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
-                                 <Card show={showCard} handleClose={handleCloseCard} />
-                               </li>
-                            )}
-                         </Draggable>
-                      ))}
-                   </ul>
-                   {provided.placeholder}
-                </div>
-             )}
-          </Droppable>
-          <Droppable droppableId="Done_drop_area"  >
-           {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}
-              >
-                <ul style={{ listStyleType: 'none', textAlign: 'left', padding: '0%', width: '100%' }} >
-                   <h2 style={{ paddingLeft: '2%' }}>Done</h2>
-                      {DC2.map((data, index) => (
-                         <Draggable key={data} draggableId={`${data}${index}`} index={index}>
-                            {(provided, snapshot) => (
-                               <li
-                                  key={index}
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={getItemStyle(
-                                     snapshot.isDragging,
-                                     provided.draggableProps.style
-                                  )}
-                               >
-                                 {data}
-                                 <FaRegEdit style={{"float":"right"}} onClick={handleShowCard}/>
-                                 <Card show={showCard} handleClose={handleCloseCard} cardData={data} />
-                               </li>
-                            )}
-                         </Draggable>
-                      ))}
-                   </ul>
-                   {provided.placeholder}
-                </div>
-             )}
-          </Droppable>
-       </div>
-    );
+                  </ul><Button variant="primary" onClick={addCard}>Add Cards</Button>
+                  {provided.placeholder}
+               </div>
+            )}
+         </Droppable>
+      </div>
+   );
 }
 
 export default Column;

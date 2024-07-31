@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
 import TopNavBar from './TopNavBar';
@@ -8,7 +7,7 @@ const Profile = () => {
     const { state } = useContext(AuthContext);
   
     const { avatar_url, name, public_repos, followers, following } = state.user
-    // console.log(avatar_url, name, public_repos, followers, following)
+    console.log(state.user)
 
     return (
         <div>

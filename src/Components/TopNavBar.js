@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Nav, Navbar, Container } from 'react-bootstrap';
+import { Nav, Navbar, Container, Image } from 'react-bootstrap';
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../App";
 import Button from 'react-bootstrap/Button';
@@ -33,6 +33,7 @@ const TopNavBar = () => {
               <Nav.Link href="/profile">Profile</Nav.Link>
             </Nav>
           </Navbar.Collapse>
+          <Image src={avatar_url} roundedCircle style={{'maxHeight':'40px', 'width':'auto', 'margin':'0 10px 0 0'}} />
           <ProfileName>{name}</ProfileName>
           <Button variant='primary' onClick={()=> handleLogout()}>Logout</Button>
         </Container>
